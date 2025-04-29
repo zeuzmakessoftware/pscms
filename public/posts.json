@@ -1,0 +1,32 @@
+[
+    {
+      "id": "1",
+      "title": "Getting Started with Next.js",
+      "slug": "getting-started-with-nextjs",
+      "content": "# Getting Started with Next.js\n\nNext.js is a **React framework** that enables server-side rendering and static site generation.\n\n## Key Features\n- File-based routing\n- API routes\n- Built-in CSS support\n- Image optimization\n\n```javascript\n// Example page in Next.js\nfunction Home() {\n  return <h1>Welcome to Next.js!</h1>\n}\n\nexport default Home\n```",
+      "keywords": ["nextjs", "react", "framework", "javascript"],
+      "createdAt": "2023-10-15T10:00:00Z",
+      "wordCount": 45,
+      "keywordDensity": {
+        "nextjs": 2.22,
+        "react": 2.22,
+        "framework": 2.22,
+        "javascript": 2.22
+      }
+    },
+    {
+      "id": "2",
+      "title": "SEO Best Practices for Developers",
+      "slug": "seo-best-practices-for-developers",
+      "content": "# SEO Best Practices\n\n## Technical SEO\n- Proper use of heading tags (H1, H2, etc.)\n- Semantic HTML\n- Mobile responsiveness\n\n## Content SEO\n- Keyword research\n- Quality content\n- Internal linking\n\n```html\n<!-- Example semantic HTML -->\n<article>\n  <h1>Article Title</h1>\n  <p>Article content...</p>\n</article>\n```",
+      "keywords": ["seo", "html", "semantic", "keywords"],
+      "createdAt": "2023-10-16T11:30:00Z",
+      "wordCount": 38,
+      "keywordDensity": {
+        "seo": 5.26,
+        "html": 2.63,
+        "semantic": 2.63,
+        "keywords": 2.63
+      }
+    }
+  ]
