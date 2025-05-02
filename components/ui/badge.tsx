@@ -1,46 +1,60 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+// Tremor Badge [v1.0.0]
 
-import { cn } from "@/lib/utils"
+import React from "react"
+import { tv, type VariantProps } from "tailwind-variants"
 
-const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive:
-          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-      },
+import { cx } from "@/lib/utils"
+
+const badgeVariants = tv({
+  base: cx(
+    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset",
+  ),
+  variants: {
+    variant: {
+      default: [
+        "bg-blue-50 text-blue-900 ring-blue-500/30",
+        "dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30",
+      ],
+      neutral: [
+        "bg-gray-50 text-gray-900 ring-gray-500/30",
+        "dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20",
+      ],
+      success: [
+        "bg-emerald-50 text-emerald-900 ring-emerald-600/30",
+        "dark:bg-emerald-400/10 dark:text-emerald-400 dark:ring-emerald-400/20",
+      ],
+      error: [
+        "bg-red-50 text-red-900 ring-red-600/20",
+        "dark:bg-red-400/10 dark:text-red-400 dark:ring-red-400/20",
+      ],
+      warning: [
+        "bg-yellow-50 text-yellow-900 ring-yellow-600/30",
+        "dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20",
+      ],
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
+
+interface BadgeProps
+  extends React.ComponentPropsWithoutRef<"span">,
+  VariantProps<typeof badgeVariants> { }
+
+const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, variant, ...props }: BadgeProps, forwardedRef) => {
+    return (
+      <span
+        ref={forwardedRef}
+        className={cx(badgeVariants({ variant }), className)}
+        tremor-id="tremor-raw"
+        {...props}
+      />
+    )
+  },
 )
 
-function Badge({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"span"> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "span"
+Badge.displayName = "Badge"
 
-  return (
-    <Comp
-      data-slot="badge"
-      className={cn(badgeVariants({ variant }), className)}
-      {...props}
-    />
-  )
-}
-
-export { Badge, badgeVariants }
+export { Badge, badgeVariants, type BadgeProps }
